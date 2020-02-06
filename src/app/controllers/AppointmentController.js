@@ -45,6 +45,11 @@ class AppointmentController {
     }
 
     const { provider_id, date } = req.body;
+    const user_id = req.userId;
+
+    if (user_id === provider_id) {
+      return res.status(401).json({ error: 'Provider and user are the same' });
+    }
 
     /**
      * Check if provider_id is a provider
@@ -80,7 +85,7 @@ class AppointmentController {
     }
 
     const appointment = await Appointment.create({
-      user_id: req.userId,
+      user_id,
       provider_id,
       date: hourStart,
     });

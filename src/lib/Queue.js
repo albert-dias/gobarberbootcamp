@@ -5,7 +5,7 @@ import redisConfig from '../config/redis';
 const jobs = [CancellationMail];
 
 class Queue {
-  contructor() {
+  constructor() {
     this.queues = {};
 
     this.init();
@@ -30,8 +30,12 @@ class Queue {
     jobs.forEach(job => {
       const { bee, handle } = this.queues[job.key];
 
-      bee.process(handle);
+      bee.on('failed', this.handleFailure).process(handle);
     });
+  }
+
+  handleFailure(job, err) {
+    console.log(`Queue ${job.queue.name}: FAILED`, err);
   }
 }
 

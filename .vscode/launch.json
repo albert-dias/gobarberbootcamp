@@ -8,7 +8,7 @@
             "type": "node",
             "request": "attach",
             "name": "GoBarber",
-            "restar": true,
+            "restart": true,
             "protocol": "inspector"
         }
     ]

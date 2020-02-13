@@ -30,7 +30,7 @@ class UserController {
     });
   }
 
-  async update(req, res) {
+  async uptade(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string(),
       email: Yup.string().email(),
